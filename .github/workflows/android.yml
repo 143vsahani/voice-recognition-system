@@ -1,0 +1,29 @@
+name: Android CI
+
+on:
+  push:
+    branches: 
+      - master
+      - staging
+      - dev
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Write permission for Gradlew
+      run: chmod +x ./gredlew
+      uses: actions/setup-java@v2
+      with:
+        java-version: '11'
+        distribution: 'adopt'
+
+    - name: build android application
+      run: ./gradlew builddevdebug
+    
+      
